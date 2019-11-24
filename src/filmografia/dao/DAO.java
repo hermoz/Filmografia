@@ -4,8 +4,13 @@ import java.util.List;
 
 import filmografia.cineCatalogo.Pelicula;
 
+/**
+ * Definimos la capa de acceso a datos
+ * @author Herminia
+ *
+ */
 
-public class DAO {
+public interface DAO {
 	/**
 	 * 
 	 * @param director
@@ -13,7 +18,6 @@ public class DAO {
 	 * @throws Exception
 	 */
 
-	/*
 	public List<Pelicula> mostarListadoPeliculas(String director) throws Exception;
-	*/
+	
 }
