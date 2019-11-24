@@ -14,7 +14,7 @@
 		<p>Lista de Peliculas:</p>
 		<ul>
 			<c:forEach items="${listadoPeliculasDirector}" var="peliculaD">
-				<li>${peliculaD. id}// ${peliculaD.titulo} //
+				<li>${peliculaD.id}// ${peliculaD.titulo} //
 					${peliculaD.fecha}</li>
 			</c:forEach>
 		</ul>
