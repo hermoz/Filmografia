@@ -77,8 +77,9 @@ public class controladorUnicoFilm  extends HttpServlet {
 					}
 					/*
 					 * Anadimos a la lista creada las películas cuyo parámetro director es el obtenido
+					 * listaPeliculas.add(request.getParameter("director"));
 					 */
-					listaPeliculas.add(request.getParameter("director"));
+					
 					
 					break;
 
