@@ -1,4 +1,5 @@
 -- Base de datos: cine, usuario: root, password: none
+-- Creamos tabla e insertamos datos
 
 CREATE TABLE IF NOT EXISTS `pelicula` (
   id INTEGER PRIMARY KEY,
@@ -30,3 +31,16 @@ INSERT INTO pelicula (id,director,titulo,fecha)
   
 INSERT INTO pelicula (id,director,titulo,fecha)
   VALUES (8,'Steven Spielberg','Munich','2006-01-27');
+
+-- tabla login para control de usuarios registrados e introducción de valores
+CREATE TABLE `login` (
+  `usuario` varchar(45) NOT NULL,
+  `clave` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`usuario`)
+);
+
+INSERT INTO login (username,password)
+ VALUES ('root','root');
+ 
+INSERT INTO login (usuario,clave)
+ VALUES ('usuario','usuario');

@@ -11,13 +11,8 @@ import filmografia.cineCatalogo.Pelicula;
  */
 
 public interface DAO {
-	/**
-	 * 
-	 * @param director
-	 * @return
-	 * @throws Exception
-	 */
 
 	public List<Pelicula> mostarListadoPeliculas(String director) throws Exception;
+	public boolean validar (String usuario, String clave) throws Exception;
 	
 }

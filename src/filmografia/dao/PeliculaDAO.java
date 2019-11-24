@@ -33,4 +33,12 @@ public class PeliculaDAO implements DAO {
 		return peliculas;
 	}
 	
+	@Override
+	public boolean validar (String usuario, String clave) throws Exception {
+		Boolean validation;
+		validation = peliConexion.validar(usuario, clave);
+		return validation;
+	}
+	
+
 }

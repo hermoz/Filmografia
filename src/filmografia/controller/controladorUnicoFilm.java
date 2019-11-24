@@ -13,87 +13,101 @@ import javax.servlet.http.HttpServletResponse;
 
 import filmografia.accion.Facade;
 import filmografia.accion.MostrarListadoPelDirector;
-
+import filmografia.accion.ValidacionUsuario;
 
 @WebServlet("/controladorUnicoFilm")
-public class controladorUnicoFilm  extends HttpServlet {
+public class controladorUnicoFilm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	 * Declaramos una lista tipo String donde guardaremos las películas resultantes de la búsqueda
+	 * Declaramos una lista tipo String donde guardaremos las películas resultantes
+	 * de la búsqueda
 	 */
 	private List<String> listaPeliculas;
 
-	
+	public controladorUnicoFilm() {
 
-    public controladorUnicoFilm() {
-    	
-    	listaPeliculas = new ArrayList<String>();
-        
-    }
-    /**
-     * Metodo doGet
-     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	doPost(request, response);
-    }
-    /**
+		listaPeliculas = new ArrayList<String>();
+
+	}
+
+	/**
+	 * Metodo doGet
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	/**
 	 * Metodo doPost
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher rd;
 		/**
-		 * Creamos objeto de la interfaz Facade que hemos implementado como interfaz unica
+		 * Creamos objeto de la interfaz Facade que hemos implementado como interfaz
+		 * unica
 		 */
 		Facade facAction = null;
-		String resultadoListado = null;
-		
+		String resultado = null;
+
 		String action = request.getParameter("action");
 		try {
 			switch (action) {
+
+			// Hacemos una llamada a cada una de las clases creadas que implementan la
+			// Facade y obtienen los parametros
 			/**
-			 * Hacemos una llamada a cada una de las clases creadas que implementan la Facade y obtienen los parametros
+			 * CASE MOSTRAR LISTADO DIRECTOR Opción Mostrar Listado de peliculas del
+			 * director donde incluimos el parámetro de nombre del director en nuestro
+			 * consultarDirector.jsp name="action" value="Mostrar listado director"
 			 */
+			case "Mostrar listado director":
+
+				facAction = new MostrarListadoPelDirector();
+				resultado = facAction.ejecutar(getServletContext(), request, response);
+
 				/**
-				 * Opción Mostrar Listado de peliculas del director donde incluimos el parámetro de nombre del director en nuestro consultarDirector.jsp
-				 * name="action" value="Mostrar listado director"
+				 * Si intentamos contemplar la opción de parameter=null obtenemos un error de
+				 * código. De modo que si el parámetro es distinto de nulo hace búsqueda en base
+				 * de datos, para resto de opciones el director no existe
 				 */
-				case "Mostrar listado director":
+				if (request.getParameter("director") != null) {
+					listaPeliculas.add(request.getParameter("director"));
+				} else {
+					resultado = "errorDirectorNoExiste.html";
+				}
+				/*
+				 * Anadimos a la lista creada las películas cuyo parámetro director es el
+				 * obtenido listaPeliculas.add(request.getParameter("director"));
+				 */
 
-					//Accedemos a nuestro paquete action correspondiente y llamamos al método correspondiente
+				break;
 
-					facAction = new MostrarListadoPelDirector();
-					resultadoListado = facAction.ejecutar(getServletContext(), request, response);
-					
-					/**
-					 * Si intentamos contemplar la opción de parameter=null obtenemos un error de código.
-					 * De modo que si el parámetro es distinto de nulo hace búsqueda en base de datos, 
-					 * para resto de opciones el director no existe
-					 */
-					if (request.getParameter("director") != null) {
-						listaPeliculas.add(request.getParameter("director"));
-					} else {
-						resultadoListado="errorDirectorNoExiste.html";
-					}
-					/*
-					 * Anadimos a la lista creada las películas cuyo parámetro director es el obtenido
-					 * listaPeliculas.add(request.getParameter("director"));
-					 */
-					
-					
-					break;
-
-				default:
-					resultadoListado = "errorControl.html";
-					break;
+			/**
+			 * CASE login usuario
+			 */
+				
+			case "Comprobar logIn usuario":
+				facAction = new ValidacionUsuario();
+				resultado = facAction.ejecutar(getServletContext(), request, response);			
+				break;
+				
+			case "Mostrar listado peliculas":
+				break;
+				
+			default:
+				resultado = "errorControl.html";
+				break;
 			}
-		
+
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
-			resultadoListado = "errorControl.html";
+			resultado = "errorControl.html";
 		}
-		rd = request.getRequestDispatcher(resultadoListado);
+		rd = request.getRequestDispatcher(resultado);
 		rd.forward(request, response);
 	}
 

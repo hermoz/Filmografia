@@ -45,13 +45,6 @@ public class MostrarListadoPelDirector implements Facade {
 				resultadoListado = "listadoPeliculasDir.jsp";
 			}
 
-			/*
-			 * if(resultadoListado != null) { //indicamos .jsp donde recogeremos parámetros
-			 * y mostraremos la información del resultado obtenido
-			 * resultadoListado="listadoPeliculasDir.jsp"; }
-			 * 
-			 * else { resultadoListado="errorDirectorNoExiste.html"; }
-			 */
 
 		} catch (Exception e) {
 			e.printStackTrace();

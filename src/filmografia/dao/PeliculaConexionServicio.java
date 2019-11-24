@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import filmografia.cineCatalogo.LogIn;
 import filmografia.cineCatalogo.Pelicula;
 
 
@@ -45,6 +46,26 @@ public class PeliculaConexionServicio {
 		}
 		return peliculas;
 	}
+	
+	public boolean validar (String usuario, String clave) throws Exception {
+		boolean status = false;
+		try {
+			query="select * from login where usuario = ? and clave = ?";
+			pstm = con.prepareStatement(query);
+			pstm.setString(1, usuario);
+			pstm.setString(2, clave);
+			rs=pstm.executeQuery();
+		} catch (SQLException e){
+			e.printStackTrace();
+			status = true;
+		}
+		return status;
+	}
+
+	
+	
+	
+	
 		
 	
 }
