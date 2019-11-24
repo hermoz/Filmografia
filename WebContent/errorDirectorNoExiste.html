@@ -7,12 +7,14 @@
 	<div
 		style="font-family: verdana; padding: 10px; border-radius: 10px; font-size: 12px; text-align: center;">
 		<h3>Se ha producido un error</h3>
-		<p>Sentimos indicarle que se ha producido un error.Vuelva de nuevo a la página principal</p>
+		<p>Sentimos indicarle que ese director no se encuentra recogido en nuestra base de datos.Vuelva a intentarlo de nuevo, gracias</p>
 		<br>
 	</div>
 	<div>
-	<!-- Volver al inicio -->
-	<a href="index.html"><button>Volver</button> </a>
+	<!-- Volver al formulario para repetir consulta -->
+		<form action="consultarDirector.jsp" method="post">
+		<input type="submit" value="Realizar consulta de nuevo"></input>
+	</form>
 	</div>
 </body>
 </html>

@@ -8,25 +8,29 @@
 <title>Listado peliculas</title>
 </head>
 <body>
+
 	<div>
+	<style="font-family: verdana; padding: 10px; border-radius: 10px; font-size: 12px; text-align: center;">
 	<!-- Mostramos listado de películas de director solicitado -->
 		<h5>Director: ${director}</h5>
-		<p>Lista de Peliculas:</p>
+		<p>Lista de Películas:</p>
 		<ul>
 			<c:forEach items="${listadoPeliculasDirector}" var="peliculaD">
-				<li>${peliculaD.id}// ${peliculaD.titulo} //
-					${peliculaD.fecha}</li>
+				<li>#${peliculaD.id}
+				 _ ${peliculaD.titulo} 
+				 _ ${peliculaD.director}		 
+				 </li>
 			</c:forEach>
 		</ul>
 	</div>
 	<br>
 	<!-- Mostramos menu con resto de opciones-->	
 	<div>
-	<p>Otras acciones<p>
+	<p>Otras acciones:<p>
 	<!-- Realizar otra consulta -->
-	<p>Pulse aquí si desea realizar otra consulta</p>
 	<a href="consultarDirector.jsp"><button>Realizar otra
 			consulta</button></a>
+	<br>
 	<br>
 	<!-- Volver al inicio -->
 		<a href="index.html"><button>Inicio</button> </a>
