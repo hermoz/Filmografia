@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import filmografia.accion.Facade;
+import filmografia.accion.MostrarListadoCompletoPeliculas;
 import filmografia.accion.MostrarListadoPelDirector;
 import filmografia.accion.ValidacionUsuario;
 
@@ -94,7 +95,14 @@ public class controladorUnicoFilm extends HttpServlet {
 				resultado = facAction.ejecutar(getServletContext(), request, response);			
 				break;
 				
-			case "Mostrar listado peliculas":
+				/**
+				 * Opción a la que accedemos mediante la opción de mantenimiento de películas de 
+				 * la pantalla de usuario
+				 */
+			case "Mostrar listado peliculas":			
+				facAction = new MostrarListadoCompletoPeliculas();
+				resultado = facAction.ejecutar(getServletContext(), request, response);
+				
 				break;
 				
 			default:

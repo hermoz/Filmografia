@@ -16,7 +16,7 @@ public class ValidacionUsuario implements Facade {
 
 	@Override
 	public String ejecutar(ServletContext sc, HttpServletRequest request, HttpServletResponse response) {
-		// obtenemos parámetro del formulario con name"director"
+		
 		String usuario = request.getParameter("usuario");
 		String clave = request.getParameter("clave");
 		

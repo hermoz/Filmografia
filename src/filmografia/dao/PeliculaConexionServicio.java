@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import filmografia.cineCatalogo.LogIn;
 import filmografia.cineCatalogo.Pelicula;
 
@@ -62,8 +63,21 @@ public class PeliculaConexionServicio {
 		return status;
 	}
 
-	
-	
+	/**
+	 * Importamos la lista completa de peliculas de la base de datos para mostrarlas al usuario 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Pelicula> mostarListadoCompletoPeliculas ()  throws Exception {
+		ArrayList<Pelicula> listaPeliculas = new ArrayList<Pelicula>();
+		query="select * from pelicula";
+		pstm = con.prepareStatement(query);
+		rs=pstm.executeQuery();
+		while (rs.next()) {
+			listaPeliculas.add(new Pelicula (rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4)));
+		}
+		return listaPeliculas;
+	}
 	
 	
 		

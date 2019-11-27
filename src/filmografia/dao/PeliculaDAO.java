@@ -1,6 +1,7 @@
 package filmografia.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import filmografia.cineCatalogo.Pelicula;
@@ -23,7 +24,7 @@ public class PeliculaDAO implements DAO {
 	
 	/**
 	 * Sobreescribimos el método correspondiente de la clase PeliculaConexionServicio
-	 * para la obtención del listado de películas 
+	 * para la obtención del listado de películas de un director concreto
 	 */
 	
 	@Override
@@ -40,5 +41,14 @@ public class PeliculaDAO implements DAO {
 		return validation;
 	}
 	
-
+	/**
+	 * Sobreescribimos método para obtener listado completo de películas de la bbdd
+	 */
+	@Override
+	public List<Pelicula> mostarListadoCompletoPeliculas()  throws Exception {
+		List<Pelicula> listaPeliculas;
+		listaPeliculas=peliConexion.mostarListadoCompletoPeliculas();
+		return listaPeliculas;
+	}
+	
 }

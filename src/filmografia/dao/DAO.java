@@ -13,6 +13,9 @@ import filmografia.cineCatalogo.Pelicula;
 public interface DAO {
 
 	public List<Pelicula> mostarListadoPeliculas(String director) throws Exception;
+	
 	public boolean validar (String usuario, String clave) throws Exception;
+	
+	public List<Pelicula> mostarListadoCompletoPeliculas ()  throws Exception;
 	
 }
