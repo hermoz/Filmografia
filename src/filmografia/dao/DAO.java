@@ -17,5 +17,12 @@ public interface DAO {
 	public boolean validar (String usuario, String clave) throws Exception;
 	
 	public List<Pelicula> mostarListadoCompletoPeliculas ()  throws Exception;
+
+	public boolean modificarPelicula(Pelicula pelicula) throws Exception;
+	
+	public boolean altaPelicula(int id, String director, String titulo) throws Exception;
+	
+	public boolean eliminarPelicula(int id) throws Exception;
+
 	
 }

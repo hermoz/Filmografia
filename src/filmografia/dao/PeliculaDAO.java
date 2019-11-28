@@ -51,4 +51,33 @@ public class PeliculaDAO implements DAO {
 		return listaPeliculas;
 	}
 	
+	/**
+	 * modificar pelicula de base de datos 
+	 */
+	
+	@Override
+	public boolean modificarPelicula(Pelicula pelicula) throws Exception {
+		Boolean validation;
+		validation=peliConexion.modificarPelicula(pelicula);
+		return validation;
+	}
+	
+	@Override
+	public boolean altaPelicula(int id, String director, String titulo) throws Exception {
+		Boolean validation;
+		validation=peliConexion.altaPelicula(id,director,titulo);
+		return validation;
+	}
+	
+	@Override
+	public boolean eliminarPelicula(int id) throws Exception {
+		Boolean validation;
+		validation=peliConexion.eliminarPelicula(id);
+		return validation;
+	}
+	
+	
+
+	
+	
 }

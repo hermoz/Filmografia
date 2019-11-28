@@ -39,7 +39,7 @@ public class MostrarListadoCompletoPeliculas implements Facade {
 
 				// indicamos .jsp donde recogeremos parámetros y mostraremos la información del
 				// resultado obtenido
-				resultadoListado = "listadoPeliculasCompleto.jsp";
+				resultadoListado = "listadoPeliculasCompletoYMenu.jsp";
 			}
 
 

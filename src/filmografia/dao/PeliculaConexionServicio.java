@@ -8,55 +8,56 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import filmografia.cineCatalogo.LogIn;
 import filmografia.cineCatalogo.Pelicula;
-
 
 public class PeliculaConexionServicio {
 
 	/**
-	 * Establecemos conexión con la base de datos creada "cine" y definimos
-	 * métodos correspondientes para las acciones
-	 * Declaramos los atributos y establecemos la conexión
+	 * Establecemos conexión con la base de datos creada "cine" y definimos métodos
+	 * correspondientes para las acciones Declaramos los atributos y establecemos la
+	 * conexión
 	 */
-	
+
 	private Connection con;
 	private PreparedStatement pstm;
 	private ResultSet rs;
 	private String query;
-	
-	public PeliculaConexionServicio () throws SQLException, ClassNotFoundException {
+
+	public PeliculaConexionServicio() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cine", "root", "");
 	}
-	
+
 	/**
-	 * Importación de la lista de películas de la base de datos filtrada según director indicado por el usuario
-	 * @return 
+	 * Importación de la lista de películas de la base de datos filtrada según
+	 * director indicado por el usuario
+	 * 
+	 * @return
 	 */
 
 	public List<Pelicula> mostarListadoPeliculas(String director) throws Exception {
 		ArrayList<Pelicula> peliculas = new ArrayList<Pelicula>();
-		query="select * from pelicula where director = ?";
+		query = "select * from pelicula where director = ?";
 		pstm = con.prepareStatement(query);
 		pstm.setString(1, director);
-		rs=pstm.executeQuery();
+		rs = pstm.executeQuery();
+
 		while (rs.next()) {
-			peliculas.add(new Pelicula (rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4)));
+			peliculas.add(new Pelicula(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
 		}
 		return peliculas;
 	}
-	
-	public boolean validar (String usuario, String clave) throws Exception {
+
+	public boolean validar(String usuario, String clave) throws Exception {
 		boolean status = false;
 		try {
-			query="select * from login where usuario = ? and clave = ?";
+			query = "select * from login where usuario = ? and clave = ?";
 			pstm = con.prepareStatement(query);
 			pstm.setString(1, usuario);
 			pstm.setString(2, clave);
-			rs=pstm.executeQuery();
-		} catch (SQLException e){
+			rs = pstm.executeQuery();
+		} catch (SQLException e) {
 			e.printStackTrace();
 			status = true;
 		}
@@ -64,22 +65,70 @@ public class PeliculaConexionServicio {
 	}
 
 	/**
-	 * Importamos la lista completa de peliculas de la base de datos para mostrarlas al usuario 
+	 * Importamos la lista completa de peliculas de la base de datos para mostrarlas
+	 * al usuario
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Pelicula> mostarListadoCompletoPeliculas ()  throws Exception {
+	public List<Pelicula> mostarListadoCompletoPeliculas() throws Exception {
 		ArrayList<Pelicula> listaPeliculas = new ArrayList<Pelicula>();
-		query="select * from pelicula";
+		query = "select * from pelicula";
 		pstm = con.prepareStatement(query);
-		rs=pstm.executeQuery();
+		rs = pstm.executeQuery();
 		while (rs.next()) {
-			listaPeliculas.add(new Pelicula (rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4)));
+			listaPeliculas.add(new Pelicula(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
 		}
 		return listaPeliculas;
 	}
+
+	public boolean modificarPelicula(Pelicula pelicula) throws Exception {
+		try {
+			query = "update pelicula set director = ?, titulo = ? where id = ? ";
+			pstm = con.prepareStatement(query);
+			pstm.setString(1, pelicula.getDirector());
+			pstm.setString(2, pelicula.getTitulo());
+			pstm.setInt(2, pelicula.getId());
+			int i = pstm.executeUpdate();
+			if (i == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean altaPelicula(int id, String director, String titulo) throws Exception {
+		try {
+			query = "insert into pelicula values (?,?,?,null) ";
+			pstm = con.prepareStatement(query);
+			pstm.setInt(1, id);
+			pstm.setString(2, director);
+			pstm.setString(3, titulo);
+			int i = pstm.executeUpdate();
+			if (i == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean eliminarPelicula(int id) throws Exception {
+		try {
+			query = "delete from pelicula where id= ?";
+			int i = pstm.executeUpdate();
+			if (i == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 	
-		
-	
+
 }

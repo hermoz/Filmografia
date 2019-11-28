@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import filmografia.accion.EliminarPelicula;
 import filmografia.accion.Facade;
+import filmografia.accion.ModificarPelicula;
 import filmografia.accion.MostrarListadoCompletoPeliculas;
 import filmografia.accion.MostrarListadoPelDirector;
 import filmografia.accion.ValidacionUsuario;
@@ -86,24 +88,39 @@ public class controladorUnicoFilm extends HttpServlet {
 
 				break;
 
-			/**
-			 * CASE login usuario
-			 */
-				
+			//LogIn Usuario		
 			case "Comprobar logIn usuario":
 				facAction = new ValidacionUsuario();
 				resultado = facAction.ejecutar(getServletContext(), request, response);			
 				break;
 				
-				/**
-				 * Opción a la que accedemos mediante la opción de mantenimiento de películas de 
-				 * la pantalla de usuario
-				 */
+			
+			//Opción a la que accedemos mediante la opción de mantenimiento de películas de la pantalla de usuario		
 			case "Mostrar listado peliculas":			
 				facAction = new MostrarListadoCompletoPeliculas();
-				resultado = facAction.ejecutar(getServletContext(), request, response);
-				
+				resultado = facAction.ejecutar(getServletContext(), request, response);	
 				break;
+			
+			/*	
+			case "Alta pelicula":			
+				facAction = new AltaPelicula();
+				resultado = facAction.ejecutar(getServletContext(), request, response);
+				break;
+			*/	
+			
+			case "Modificar Pelicula":			
+				facAction = new ModificarPelicula() ;
+				resultado = facAction.ejecutar(getServletContext(), request, response);
+				break;
+			
+			case "Eliminar Pelicula":			
+				facAction = new EliminarPelicula();
+				resultado = facAction.ejecutar(getServletContext(), request, response);
+				break;
+				
+			
+				
+				
 				
 			default:
 				resultado = "errorControl.html";
